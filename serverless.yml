@@ -78,7 +78,7 @@ provider:
         - Effect: "Allow"
           Action: 
             - "dynamodb:UpdateItem"
-        Resource: !GetAtt StudentsTable.Arn
+          Resource: !GetAtt StudentsTable.Arn
     getAllStudents:
       handler: api.getAllStudents
       name: get-all-students
@@ -92,7 +92,7 @@ provider:
         - Effect: "Allow"
           Action: 
             - "dynamodb:Scan"
-        Resource: !GetAtt StudentsTable.Arn
+          Resource: !GetAtt StudentsTable.Arn
 
 
 
