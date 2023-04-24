@@ -12,7 +12,7 @@ provider:
   custom:
     #change to sls:stage instead of self:provider.stage for new syntax
     #otherwise errors with cannot resolve variable
-    studentTableName: students-table-${opt:stage, self:provider.stage, 'dev'}
+    studentTableName: students-table-${sls:stage}
     #certificationTableName: certifications-table-${self:provider.stage}
 
   plugins:
