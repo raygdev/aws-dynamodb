@@ -37,7 +37,6 @@ provider:
           # specify the resource to allow the action on
           #!GetAtt special attribute to reference amazon Arn(amazon resource name) of the table
           Resource: !GetAtt StudentsTable.Arn
-
     createStudent:
       handler: api.createStudent
       name: create-student
@@ -52,7 +51,6 @@ provider:
           Action:
             - "dynamodb:PutItem"
           Resource: !GetAtt StudentsTable.Arn
-
     deleteStudent:
       handler: api.deleteStudent
       name: delete-student
@@ -67,7 +65,6 @@ provider:
           Action:
             - "dynamodb:DeleteItem"
         Resource: !GetAtt StudentsTable.Arn
-
     updateStudent:
       handler: api.updateStudent
       name: update-student
@@ -82,7 +79,6 @@ provider:
           Action: 
             - "dynamodb:UpdateItem"
         Resource: !GetAtt StudentsTable.Arn
-
     getAllStudents:
       handler: api.getAllStudents
       name: get-all-students
