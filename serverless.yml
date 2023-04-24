@@ -1,9 +1,11 @@
 service: FCC DynamoDB CRUD API
 
+frameworkVersion: "2"
+
 provider:
   name: aws
   runtime: node.js14.x
-  stage: 'dev'
+  stage: dev
   region: us-east-1
   environments:
     DYNAMODB_STUDENT_TABLE_NAME: ${self:custom.studentTableName}
