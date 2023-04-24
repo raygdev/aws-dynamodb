@@ -7,11 +7,11 @@ provider:
   region: us-east-1
   environments:
     DYNAMODB_STUDENT_TABLE_NAME: ${self:custom.studentTableName}
-    DYNAMODB_CERTIFICATIONS_TABLE_NAME: ${self:custom.certificationTableName}
+    #DYNAMODB_CERTIFICATIONS_TABLE_NAME: ${self:custom.certificationTableName}
   
   custom:
     studentTableName: students-table-${self:provider.stage}
-    certificationTableName: certifications-table-${self:provider.stage}
+    #certificationTableName: certifications-table-${self:provider.stage}
 
   plugins:
     - serverless-iam-roles-per-function
@@ -111,16 +111,16 @@ provider:
           ProvisionedThroughput:
             ReadCapadityUnits: 1
             WriteCapacityUnits: 1
-      CertificationsTable:
-        Type: AWS::DynamoDB::Table
-        Properties:
-          TableName: ${self:custom.certificationTableName}
-        AttributeDefinitions:
-          - AttributeName: certificationId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: certificationId
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+      #CertificationsTable:
+        #Type: AWS::DynamoDB::Table
+        #Properties:
+          #TableName: ${self:custom.certificationTableName}
+        #AttributeDefinitions:
+          #- AttributeName: certificationId
+            #AttributeType: S
+        #KeySchema:
+          #- AttributeName: certificationId
+            #KeyType: HASH
+        #ProvisionedThroughput:
+          #ReadCapacityUnits: 1
+          #WriteCapacityUnits: 1
