@@ -10,7 +10,7 @@ provider:
     #DYNAMODB_CERTIFICATIONS_TABLE_NAME: ${self:custom.certificationTableName}
   
   custom:
-    #change to sls:stage instead of self:provider.stage for new syntax
+    #change to sls:stage instead of self:provider.stage for new synta
     #otherwise errors with cannot resolve variable
     studentTableName: students-table-${sls:stage}
     #certificationTableName: certifications-table-${self:provider.stage}
