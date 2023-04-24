@@ -106,7 +106,7 @@ const deleteStudent = async (event) => {
         const deletedStudent = await db.send(new DeleteItemCommand(params))
         response.body = JSON.stringify({
             message: "Successfully deleted the student",
-            deleteStudent
+            deletedStudent
         })
     } catch(e) {
         console.log(e)
