@@ -1,129 +1,129 @@
 service: fcc-dynamodb-crud-api
 
 
-custom:
-  #change to sls:stage instead of self:provider.stage for new syntax
-  #otherwise errors with cannot resolve variable
-  studentTableName: students-table-${opt:stage, self:provider.stage, 'dev'}
-  #certificationTableName: certifications-table-${self:provider.stage}
 provider:
   name: aws
   runtime: node.js14.x
   stage: dev
   region: us-east-1
-  environments:
+  environment:
     DYNAMODB_STUDENT_TABLE_NAME: ${self:custom.studentTableName}
     #DYNAMODB_CERTIFICATIONS_TABLE_NAME: ${self:custom.certificationTableName}
   
+custom:
+  #change to sls:stage instead of self:provider.stage for new syntax
+  #otherwise errors with cannot resolve variable
+  studentTableName: students-table-${opt:stage, self:provider.stage, 'dev'}
+  #certificationTableName: certifications-table-${self:provider.stage}
 
-  plugins:
-    - serverless-iam-roles-per-function
+plugins:
+  - serverless-iam-roles-per-function
 
-  functions:
-    getStudent:
-      handler: api.getStudent
-      name: get-student
-      memorySize: 128 #mb
-      timeout: 5 #seconds
-      #event triggers to know when a lambda function is supposed to execute
-      events:
-        # - http trigger(event) for when someone makes an http request
-        - http:
-            path: students/{studentId}
-            method: GET
-      #specifies roles for the lambda function
-      iamRoleStatements:
-        #allows function to perform listed actions
-        - Effect: "Allow"
-          Action:
-            - "dynamodb:GetItem"
-          # specify the resource to allow the action on
-          #!GetAtt special attribute to reference amazon Arn(amazon resource name) of the table
-          Resource: !GetAtt StudentsTable.Arn
-    createStudent:
-      handler: api.createStudent
-      name: create-student
-      memorySize: 128 # mb
-      timeout: 5 # seconds
-      events:
-        - http:
-            path: students
-            method: POST
-      iamRoleStatements:
-        - Effect: "Allow"
-          Action:
-            - "dynamodb:PutItem"
-          Resource: !GetAtt StudentsTable.Arn
-    deleteStudent:
-      handler: api.deleteStudent
-      name: delete-student
-      memorySize: 128 # mb
-      timeout: 5 # seconds
-      events:
-        - http:
-            path: students/{studentId}
-            method: DELETE
-      iamRoleStatements:
-        - Effect: "Allow"
-          Action:
-            - "dynamodb:DeleteItem"
-          Resource: !GetAtt StudentsTable.Arn
-    updateStudent:
-      handler: api.updateStudent
-      name: update-student
-      memorySize: 128 # mb
-      timeout: 5 # seconds
-      events:
-        - https:
-            path: students/{studentId}
-            method: PUT
-      iamRoleStatements:
-        - Effect: "Allow"
-          Action: 
-            - "dynamodb:UpdateItem"
-          Resource: !GetAtt StudentsTable.Arn
-    getAllStudents:
-      handler: api.getAllStudents
-      name: get-all-students
-      memorySize: 128 # mb
-      timeout: 5 # seconds
-      events:
-        - http:
-            path: students
-            method: GET
-      iamRoleStatements:
-        - Effect: "Allow"
-          Action: 
-            - "dynamodb:Scan"
-          Resource: !GetAtt StudentsTable.Arn
+functions:
+  getStudent:
+    handler: api.getStudent
+    name: get-student
+    memorySize: 128 #mb
+    timeout: 5 #seconds
+    #event triggers to know when a lambda function is supposed to execute
+    events:
+      # - http trigger(event) for when someone makes an http request
+      - http:
+          path: students/{studentId}
+          method: GET
+    #specifies roles for the lambda function
+    iamRoleStatements:
+      #allows function to perform listed actions
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:GetItem"
+        # specify the resource to allow the action on
+        #!GetAtt special attribute to reference amazon Arn(amazon resource name) of the table
+        Resource: !GetAtt StudentsTable.Arn
+  createStudent:
+    handler: api.createStudent
+    name: create-student
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - http:
+          path: students
+          method: POST
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:PutItem"
+        Resource: !GetAtt StudentsTable.Arn
+  deleteStudent:
+    handler: api.deleteStudent
+    name: delete-student
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - http:
+          path: students/{studentId}
+          method: DELETE
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:DeleteItem"
+        Resource: !GetAtt StudentsTable.Arn
+  updateStudent:
+    handler: api.updateStudent
+    name: update-student
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - https:
+          path: students/{studentId}
+          method: PUT
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action: 
+          - "dynamodb:UpdateItem"
+        Resource: !GetAtt StudentsTable.Arn
+  getAllStudents:
+    handler: api.getAllStudents
+    name: get-all-students
+    memorySize: 128 # mb
+    timeout: 5 # seconds
+    events:
+      - http:
+          path: students
+          method: GET
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action: 
+          - "dynamodb:Scan"
+        Resource: !GetAtt StudentsTable.Arn
 
 
 
-  recources:
-    Recources:
-      StudentsTable: 
-        Type: AWS::DynamoDB::Table
-        Properties:
-          TableName: ${self:custom.studentTableName}
-          AttributeDefinitions:
-            - AttributeName: studentId
-              AttributeType: S
-          KeySchema:
-            - AttributeName: studentId
-              KeyType: HASH
-          ProvisionedThroughput:
-            ReadCapadityUnits: 1
-            WriteCapacityUnits: 1
-      #CertificationsTable:
-        #Type: AWS::DynamoDB::Table
-        #Properties:
-          #TableName: ${self:custom.certificationTableName}
-        #AttributeDefinitions:
-          #- AttributeName: certificationId
-            #AttributeType: S
-        #KeySchema:
-          #- AttributeName: certificationId
-            #KeyType: HASH
-        #ProvisionedThroughput:
-          #ReadCapacityUnits: 1
-          #WriteCapacityUnits: 1
+recources:
+  Recources:
+    StudentsTable: 
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.studentTableName}
+        AttributeDefinitions:
+          - AttributeName: studentId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: studentId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapadityUnits: 1
+          WriteCapacityUnits: 1
+    #CertificationsTable:
+      #Type: AWS::DynamoDB::Table
+      #Properties:
+        #TableName: ${self:custom.certificationTableName}
+      #AttributeDefinitions:
+        #- AttributeName: certificationId
+          #AttributeType: S
+      #KeySchema:
+        #- AttributeName: certificationId
+          #KeyType: HASH
+      #ProvisionedThroughput:
+        #ReadCapacityUnits: 1
+        #WriteCapacityUnits: 1
