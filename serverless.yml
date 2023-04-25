@@ -73,7 +73,7 @@ functions:
     memorySize: 128 # mb
     timeout: 5 # seconds
     events:
-      - https:
+      - http:
           path: students/{studentId}
           method: PUT
     iamRoleStatements:
