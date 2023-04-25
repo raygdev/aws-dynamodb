@@ -32,6 +32,7 @@ const getStudent = async (event) => {
             errorStack: e.stack
         })
     }
+    return response
 }
 
 const createStudent = async (event) => {
@@ -58,6 +59,7 @@ const createStudent = async (event) => {
             errorStack: e.stack
         })
     }
+    return response
 }
 
 const updateStudent = async (event) => {
@@ -93,6 +95,7 @@ const updateStudent = async (event) => {
             errorStack: e.stack
         })
     }
+    return response
 }
 
 const deleteStudent = async (event) => {
@@ -117,6 +120,7 @@ const deleteStudent = async (event) => {
             errorStack: e.stack
         })
     }
+    return response
 }
 
 const getAllStudents = async (event) => {
@@ -137,6 +141,7 @@ const getAllStudents = async (event) => {
             errorStack: e.stack
         })
     }
+    return response
 }
 
 module.exports = {
