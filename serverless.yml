@@ -111,7 +111,7 @@ resources:
           - AttributeName: studentId
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapadityUnits: 1
+          ReadCapacityUnits: 1
           WriteCapacityUnits: 1
     CertificationsTable:
       Type: AWS::DynamoDB::Table
