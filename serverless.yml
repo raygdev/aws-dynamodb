@@ -16,8 +16,8 @@ custom:
   studentTableName: students-table-${opt:stage, self:provider.stage, 'dev'}
   certificationTableName: certifications-table-${self:provider.stage}
 
-  plugins:
-    - serverless-iam-roles-per-function
+plugins:
+  - serverless-iam-roles-per-function
 
 functions:
   getStudent:
@@ -98,8 +98,8 @@ functions:
 
 
 
-recources:
-  Recources:
+resources:
+  Resources:
     StudentsTable: 
       Type: AWS::DynamoDB::Table
       Properties:
