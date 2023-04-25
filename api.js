@@ -44,10 +44,10 @@ const createStudent = async (event) => {
             TableName: process.env.DYNAMODB_STUDENT_TABLE_NAME,
             Item: marshall(body || {})
         }
-        const createStudent = await db.send(new PutItemCommand(params))
+        const createdStudent = await db.send(new PutItemCommand(params))
         response.body = JSON.stringify({
             message: "Successfully created the student",
-            createStudent
+            createdStudent
         })
 
     } catch(e) {
