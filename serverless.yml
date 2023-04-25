@@ -1,7 +1,11 @@
 service: FCC DynamoDB CRUD API
 
-frameworkVersion: "2"
 
+custom:
+  #change to sls:stage instead of self:provider.stage for new syntax
+  #otherwise errors with cannot resolve variable
+  studentTableName: students-table-${opt:stage, self:provider.stage, 'dev'}
+  #certificationTableName: certifications-table-${self:provider.stage}
 provider:
   name: aws
   runtime: node.js14.x
@@ -11,11 +15,6 @@ provider:
     DYNAMODB_STUDENT_TABLE_NAME: ${self:custom.studentTableName}
     #DYNAMODB_CERTIFICATIONS_TABLE_NAME: ${self:custom.certificationTableName}
   
-  custom:
-    #change to sls:stage instead of self:provider.stage for new syntax
-    #otherwise errors with cannot resolve variable
-    studentTableName: students-table-${opt:stage, self:provider.stage, 'dev'}
-    #certificationTableName: certifications-table-${self:provider.stage}
 
   plugins:
     - serverless-iam-roles-per-function
