@@ -1,4 +1,4 @@
-service: FCC DynamoDB CRUD API
+service: fcc-dynamodb-crud-api
 
 
 custom:
