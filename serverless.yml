@@ -3,7 +3,7 @@ service: fcc-dynamodb-crud-api
 
 provider:
   name: aws
-  runtime: node.js14.x
+  runtime: [node.js14.x]
   stage: dev
   region: us-east-1
   environment:
