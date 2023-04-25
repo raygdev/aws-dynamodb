@@ -27,7 +27,6 @@ functions:
     timeout: 5 #seconds
     #event triggers to know when a lambda function is supposed to execute
     events:
-      # - http trigger(event) for when someone makes an http request
       - http:
           path: students/{studentId}
           method: GET
