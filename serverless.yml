@@ -99,31 +99,31 @@ functions:
 
 
 
-recources:
-  Recources:
-    StudentsTable: 
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:custom.studentTableName}
-        AttributeDefinitions:
-          - AttributeName: studentId
-            AttributeType: S
-        KeySchema:
-          - AttributeName: studentId
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapadityUnits: 1
-          WriteCapacityUnits: 1
-    #CertificationsTable:
-      #Type: AWS::DynamoDB::Table
-      #Properties:
-        #TableName: ${self:custom.certificationTableName}
-      #AttributeDefinitions:
-        #- AttributeName: certificationId
-          #AttributeType: S
-      #KeySchema:
-        #- AttributeName: certificationId
-          #KeyType: HASH
-      #ProvisionedThroughput:
-        #ReadCapacityUnits: 1
-        #WriteCapacityUnits: 1
+  recources:
+    Recources:
+      StudentsTable: 
+        Type: AWS::DynamoDB::Table
+        Properties:
+          TableName: ${self:custom.studentTableName}
+          AttributeDefinitions:
+            - AttributeName: studentId
+              AttributeType: S
+          KeySchema:
+            - AttributeName: studentId
+              KeyType: HASH
+          ProvisionedThroughput:
+            ReadCapadityUnits: 1
+            WriteCapacityUnits: 1
+      #CertificationsTable:
+        #Type: AWS::DynamoDB::Table
+        #Properties:
+          #TableName: ${self:custom.certificationTableName}
+        #AttributeDefinitions:
+          #- AttributeName: certificationId
+            #AttributeType: S
+        #KeySchema:
+          #- AttributeName: certificationId
+            #KeyType: HASH
+        #ProvisionedThroughput:
+          #ReadCapacityUnits: 1
+          #WriteCapacityUnits: 1
